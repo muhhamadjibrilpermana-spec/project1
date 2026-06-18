@@ -1,0 +1,165 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #000;
+    color: #00ff00;
+    margin: 0;
+    padding: 20px;
+    perspective: 1000px;
+    overflow-x: hidden;
+}
+
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.15;
+}
+
+.wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 410px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    text-align: center;
+    border: 2px double #00ff00;
+    background-color: rgba(9, 15, 9, 0.85);
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 18px;
+    text-shadow: 0 0 8px #00ff00;
+}
+
+.dashboard-header .subtitle {
+    font-size: 11px; 
+    margin-top: 5px; 
+    color: #888;
+}
+
+.input-panel {
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 1px solid #00ff00;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 10px;
+    background-color: #050505;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.beta-warning {
+    font-size: 10px;
+    color: #ffaa00;
+    margin-top: 8px;
+    line-height: 14px;
+    border-left: 2px solid #ffaa00;
+    padding-left: 8px;
+    text-shadow: 0 0 3px rgba(255, 170, 0, 0.3);
+}
+
+.terminal {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid #00ff00;
+    padding: 15px;
+    margin-bottom: 30px;
+    text-align: left;
+    height: 120px;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    font-size: 11px;
+    line-height: 18px;
+}
+
+.card-container {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 40px auto;
+}
+
+.vibe-button {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    border: 2px solid #00ff00;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+.front {
+    background-color: #0f1f0f;
+    color: #00ff00;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.back {
+    background-color: #1a0505;
+    color: #ff3333;
+    border-color: #ff3333;
+    transform: rotateY(180deg);
+    font-size: 70px;
+    box-shadow: 0 0 25px rgba(255, 51, 51, 0.4);
+}
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+.cursor {
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}

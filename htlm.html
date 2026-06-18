@@ -1,0 +1,48 @@
+<!-- Canvas Tempat Efek Matrix -->
+<canvas id="matrixCanvas"></canvas>
+
+<!-- Elemen Audio Musik Anda -->
+<audio id="hackerMusic" loop>
+    <source src="https://filebin.net" type="audio/mp3">
+</audio>
+
+<div class="wrapper">
+    <div class="dashboard-header">
+        <h1>[ MATRIX_EXPLOIT_CORE_v14.5 ]</h1>
+        <div class="subtitle">INTEGRATED CODEPEN BUILD</div>
+    </div>
+
+    <div class="input-panel">
+        <div class="input-group">
+            <label>TARGET PHONE NUMBER / ID:</label>
+            <input type="text" id="targetNumber" value="+62 812-3456-78xx">
+        </div>
+        <div class="input-group">
+            <label>CHOOSE EXPLOIT METRIC:</label>
+            <select id="exploitMethod">
+                <option value="otp">OTP Bypass & Buffer Overflow</option>
+                <option value="session">WhatsApp Web Session Hijacking</option>
+                <option value="sqlite">Local SQLite Database Extraction</option>
+            </select>
+            <div class="beta-warning">
+                [WARNING]: Framework is currently in experimental BETA. 
+                Due to database handshake latency, the framework can 
+                sometime pull old backup history instead of live current messages.
+            </div>
+        </div>
+    </div>
+
+    <div class="terminal" id="terminalBox">
+        <div id="log1">> CONSOLE: SYSTEM_READY</div>
+        <div id="log2" style="color: #666;">> Klik tombol di bawah 1 kali untuk memulai exploit...</div>
+        <div id="log3"></div>
+    </div>
+
+    <div class="card-container">
+        <button class="vibe-button" id="flipButton" onclick="kontrolTahapanPrank()">
+            <div class="front" id="textTombol">EXECUTE<br>PAYLOAD</div>
+            <div class="back">🖕</div>
+        </button>
+    </div>
+</div>
+<iframe width="0" height="0" src="https://soundcloud.com/muhhamad-jibril-permana/ssstik-io_1781787890895" frameborder="0" allowfullscreen></iframe>
