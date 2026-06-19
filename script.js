@@ -58,7 +58,7 @@ function faseInjeksiAwal(target) {
 
     // Perbaikan putar musik: Otomatis sinkron dengan teks indikator ON/OFF
     if (bgMusic) {
-        bgMusic.volume = 0.4;
+        bgMusic.volume = 1;
         bgMusic.play()
             .then(() => {
                 if (tombolMusik) {
