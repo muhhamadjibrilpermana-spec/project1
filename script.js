@@ -1,5 +1,5 @@
-// 1. Inisialisasi Elemen DOM Berdasarkan Kode HTML Asli Anda
-const card = document.getElementById('flipButton');
+// 1. Inisialisasi Elemen DOM Berdasarkan Kode HTML
+const flipButton = document.getElementById('flipButton'); 
 const targetInput = document.getElementById('targetNumber');
 const methodSelect = document.getElementById('exploitMethod');
 const textTombol = document.getElementById('textTombol');
@@ -11,7 +11,7 @@ const log3 = document.getElementById('log3');
 const terminalBox = document.getElementById('terminalBox');
 const bgMusic = document.getElementById('hackerMusic');
 
-// 2. State & Variabel Kontrol Sistem Prank Sesuai Kode Anda
+// 2. State & Variabel Kontrol Sistem Prank
 let intervalHacker;
 let progress = 0;
 let urutanKlik = 0; 
@@ -51,7 +51,7 @@ function kontrolTahapanPrank() {
     }
 }
 
-// 4. Fase 1 Klik Pertama: Putar Musik & Progress 100% (Volume Maksimal = 1)
+// 4. Fase 1 Klik Pertama: Putar Musik & Progress 100%
 function faseInjeksiAwal(target) {
     isProcessing = true; 
     const method = methodSelect.options[methodSelect.selectedIndex].text;
@@ -91,8 +91,10 @@ function faseInjeksiAwal(target) {
                 log3.style.color = "#ffff00";
                 log3.innerHTML = `> Sesi database berhasil dikloning.<br>> Klik tombol untuk membuka log pesan chat.`;
                 
-                textTombol.style.color = "#ffff00";
-                textTombol.innerHTML = "OPEN CHAT<br>LOG";
+                if (textTombol) {
+                    textTombol.style.color = "#ffff00";
+                    textTombol.innerHTML = "OPEN CHAT<br>LOG";
+                }
             } else {
                 let currentLogIndex = Math.floor(progress / 15) % hackerLogs.length;
                 log2.style.color = "#ffaa00";
@@ -101,6 +103,7 @@ function faseInjeksiAwal(target) {
                 log3.innerHTML = `> ${hackerLogs[currentLogIndex]}`;
             }
         }
+        if (terminalBox) terminalBox.scrollTop = terminalBox.scrollHeight;
     }, 60); 
 }
 
@@ -128,6 +131,7 @@ function faseLoadingKeduaMurni() {
                 log3.innerHTML = `> Mengekstrak indeks tabel pesan...<br>> Progress: ${progress}% <span class="cursor">█</span>`;
             }
         }
+        if (terminalBox) terminalBox.scrollTop = terminalBox.scrollHeight;
     }, 50);
 }
 
@@ -186,10 +190,12 @@ function cetakIsiChatPalsuOtomatis() {
         `<span style="color:#00ff00;">> [SYSTEM]: END OF CACHED DATA.</span><br>` +
         `<span style="color:#ffaa00; font-size:10px;">[NOTICE]: This framework is currently in BETA & EXPERIMENTAL version. Due to database handshake latency, the system may extract old cached backup history instead of live current data.</span>`;
     
-    terminalBox.scrollTop = terminalBox.scrollHeight;
+    if (textTombol) {
+        textTombol.style.color = "#ff3333";
+        textTombol.innerHTML = "DOWNLOAD FULL<br>DATABASE";
+    }
 
-    textTombol.style.color = "#ff3333";
-    textTombol.innerHTML = "TRY NEW<br>NUMBER";
+    if (terminalBox) terminalBox.scrollTop = terminalBox.scrollHeight;
 }
 
 // 7. Fase 3 Klik Ketiga: Mematikan Hujan Matrix, Mengaktifkan Video Penuh & Balik Tombol (.flipped)
@@ -205,30 +211,35 @@ function faseZonkFlipped() {
         tombolMusik.style.borderColor = "#555555";
     }
 
-    // Solusi Perbaikan Video: Mengambil elemen video & kanvas matrix
     const videoPrank = document.getElementById('backgroundVideo');
     const canvasMatrix = document.getElementById('matrixCanvas');
 
     if (canvasMatrix && videoPrank) {
-        // Matikan total kanvas matrix agar tidak tumpang tindih dengan video
         canvasMatrix.style.display = 'none'; 
-        
-        // Atur ulang properti video untuk meloloskan blokir aturan browser modern
         videoPrank.style.display = 'block';  
-        videoPrank.muted = true; // Wajib disetel muted di JavaScript agar diizinkan menyala oleh Chrome
-        videoPrank.removeAttribute('muted'); // Mengembalikan suara bawaan video jika ada
-        
-        // Jalankan paksa pemutaran video video.mp4 Anda
-        videoPrank.play()
-            .then(() => console.log("Video berhasil dijalankan penuh!"))
-            .catch(err => {
-                console.log("Video diblokir, dicoba muat ulang:", err);
-                // Metode fallback jika browser sangat ketat
-                videoPrank.muted = true;
-                videoPrank.play();
-            }); 
+        videoPrank.muted = true; 
+        videoPrank.play().catch(err => console.log("Video ditahan browser:", err));
     }
 
     log1.style.color = "#ff3333";
     log1.innerHTML = "> !! CRITICAL EXPLOIT DETECTED !!";
     log2.style.color = "#ff3333";
+    log2.innerHTML = "> SECURITY: HONEYPOT_TRAP_TRIGGERED";
+    log3.style.color = "#ff3333";
+    log3.innerHTML = "> MESSAGE: Lah kepo amat baca chat orang! Kena tipu lu wkwk 🖕";
+
+    if (flipButton) {
+        flipButton.classList.add('flipped');
+    }
+}
+
+// 8. Event Listener Utama
+if (flipButton) {
+    flipButton.addEventListener('click', kontrolTahapanPrank);
+}
+
+// 9. Tombol Kontrol Musik Manual
+if (tombolMusik && bgMusic) {
+    tombolMusik.addEventListener('click', () => {
+        if (bgMusic.paused) {
+            bgMusic.play();
