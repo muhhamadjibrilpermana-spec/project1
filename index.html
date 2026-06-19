@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matrix Exploit Core</title>
 
-    <!-- 1. LINK HUBUNGAN KE CSS (Menggunakan huruf kecil semua) -->
+    <!-- LINK HUBUNGAN KE CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Tombol Toggle Musik Latar -->
+    <button id="musicToggleBtn" onclick="toggleMusikAja()">🎵 MUSIC: OFF</button>
+
     <!-- Canvas Tempat Efek Matrix -->
     <canvas id="matrixCanvas"></canvas>
 
-    <!-- Elemen Audio Musik Anda -->
+    <!-- Elemen Audio Musik Lokal Anda -->
     <audio id="hackerMusic" loop>
-        <source src="https://filebin.net" type="audio/mp3">
+        <source src="ssstik.io_1781787890895.mp3" type="audio/mp3">
     </audio>
 
     <div class="wrapper">
@@ -58,10 +61,7 @@
         </div>
     </div>
 
-    <!-- Pemutar Audio Iframe SoundCloud -->
-    <iframe width="0" height="0" src="https://soundcloud.com" frameborder="0" allow="autoplay"></iframe>
-
-    <!-- 2. SCRIPT HUBUNGAN KE JAVASCRIPT (Menggunakan huruf kecil semua) -->
+    <!-- SCRIPT HUBUNGAN KE JAVASCRIPT -->
     <script src="script.js"></script>
 
 </body>
