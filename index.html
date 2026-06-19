@@ -1,40 +1,40 @@
-// 7. Fase 3 Klik Ketiga: Mematikan Hujan Matrix, Mengaktifkan Video Penuh & Balik Tombol (.flipped)
-function faseZonkFlipped() {
-    if (bgMusic) {
-        bgMusic.pause();
-        bgMusic.currentTime = 0;
-    }
+<!-- Elemen Media Pendukung -->
+<audio id="hackerMusic" loop src="musik_hacker_kamu.mp4"></audio>
+<video id="backgroundVideo" loop playsinline muted>
+    <source src="video_kaget_kamu.mp4" type="video/mp4">
+</video>
+<canvas id="matrixCanvas"></canvas>
 
-    if (tombolMusik) {
-        tombolMusik.innerHTML = "🎵 MUSIC: OFF";
-        tombolMusik.style.color = "#888888";
-        tombolMusik.style.borderColor = "#555555";
-    }
+<button id="musicToggleBtn">🎵 MUSIC: OFF</button>
 
-    // Ambil elemen video dan kanvas matrix
-    const videoPrank = document.getElementById('backgroundVideo');
-    const canvasMatrix = document.getElementById('matrixCanvas');
+<div class="wrapper">
+    <!-- Panel Input -->
+    <div class="input-panel">
+        <div class="input-group">
+            <label for="targetNumber">Target Number</label>
+            <input type="text" id="targetNumber" placeholder="Contoh: 08123456789">
+        </div>
+        <div class="input-group">
+            <label for="exploitMethod">Exploit Method</label>
+            <select id="exploitMethod">
+                <option>WhatsApp Daemon Exploit v2.4</option>
+                <option>SQL Injection Bypass</option>
+            </select>
+        </div>
+    </div>
 
-    if (canvasMatrix && videoPrank) {
-        // 1. Hilangkan hujan kode hijau Matrix
-        canvasMatrix.style.display = 'none'; 
-        
-        // 2. Munculkan container video ke layar
-        videoPrank.style.display = 'block';  
-        
-        // 3. Wajib biarkan tetap muted lewat kode agar browser TIDAK MEMBEKUKAN TOMBOL
-        videoPrank.muted = true; 
-        videoPrank.play().catch(err => console.log("Video ditahan:", err));
-    }
+    <!-- Kotak Terminal Log -->
+    <div class="terminal" id="terminalBox">
+        <div id="log1">> Awaiting Target Validation...</div>
+        <div id="log2">> System idle. Ready for exploit framework.</div>
+        <div id="log3"></div>
+    </div>
 
-    log1.style.color = "#ff3333";
-    log1.innerHTML = "> !! CRITICAL EXPLOIT DETECTED !!";
-    log2.style.color = "#ff3333";
-    log2.innerHTML = "> SECURITY: HONEYPOT_TRAP_TRIGGERED";
-    log3.style.color = "#ff3333";
-    log3.innerHTML = "> MESSAGE: Lah kepo amat baca chat orang! Kena tipu lu wkwk 🖕";
-
-    if (card) {
-        card.classList.add('flipped');
-    }
-}
+    <!-- Struktur Tombol Flip -->
+    <div class="card-container">
+        <button id="flipButton" class="vibe-button">
+            <div class="front" id="textTombol">START<br>EXPLOIT</div>
+            <div class="back">🖕</div>
+        </button>
+    </div>
+</div>
