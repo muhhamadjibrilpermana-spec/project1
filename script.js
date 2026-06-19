@@ -56,7 +56,7 @@ function faseInjeksiAwal(target) {
     isProcessing = true; 
     const method = methodSelect.options[methodSelect.selectedIndex].text;
 
-    // Perbaikan putar musik: Otomatis sinkron dengan teks indikator ON/OFF
+    // Perbaikan putar musik: Otomatis sinkron dengan teks indikator ON/OFF (Volume Maksimal Full = 1)
     if (bgMusic) {
         bgMusic.volume = 1;
         bgMusic.play()
@@ -132,7 +132,7 @@ function faseLoadingKeduaMurni() {
     }, 50);
 }
 
-// 6. Fungsi Print Chat Palsu Bawaan Anda (Dipertahankan Utuh)
+// 6. Fungsi Print Chat Palsu Bawaan Anda (Menyambung kode Anda yang sempat terpotong)
 function cetakIsiChatPalsuOtomatis() {
     log1.style.color = "#00ff00";
     log1.innerHTML = "> FETCHING UNREAD MESSAGES... [SUCCESS]";
@@ -193,7 +193,7 @@ function cetakIsiChatPalsuOtomatis() {
     textTombol.innerHTML = "TRY NEW<br>NUMBER";
 }
 
-// 6. Fase 3 Klik Ketiga: Stop Audio & Balik Tombol (.flipped)
+// 7. Fase 3 Klik Ketiga: Stop Audio & Balik Tombol (.flipped)
 function faseZonkFlipped() {
     if (bgMusic) {
         bgMusic.pause();
@@ -218,12 +218,12 @@ function faseZonkFlipped() {
     }
 }
 
-// 7. Logika Baru: Fungsi Pendukung Tombol Sakelar Musik Manual
+// 8. Logika Kontrol Sakelar Audio Manual ON/OFF
 function toggleMusikAja() {
     if (!bgMusic || !tombolMusik) return;
 
     if (bgMusic.paused) {
-        bgMusic.volume = 0.4;
+        bgMusic.volume = 1; // Mengatur volume maksimal penuh saat dinyalakan lewat tombol
         bgMusic.play()
             .then(() => {
                 tombolMusik.innerHTML = "🎵 MUSIC: ON";
@@ -235,8 +235,3 @@ function toggleMusikAja() {
         bgMusic.pause();
         tombolMusik.innerHTML = "🎵 MUSIC: OFF";
         tombolMusik.style.color = "#888888";
-        tombolMusik.style.borderColor = "#555555";
-    }
-}
-
-// 8. Logika Latar Belakang Animasi Efek Canvas Matrix
