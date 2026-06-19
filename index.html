@@ -1,73 +1,40 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix Exploit Core</title>
+// 7. Fase 3 Klik Ketiga: Mematikan Hujan Matrix, Mengaktifkan Video Penuh & Balik Tombol (.flipped)
+function faseZonkFlipped() {
+    if (bgMusic) {
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+    }
 
-    <!-- LINK HUBUNGAN KE CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    if (tombolMusik) {
+        tombolMusik.innerHTML = "🎵 MUSIC: OFF";
+        tombolMusik.style.color = "#888888";
+        tombolMusik.style.borderColor = "#555555";
+    }
 
-    <!-- Tombol Toggle Musik Latar -->
-    <button id="musicToggleBtn" onclick="toggleMusikAja()">🎵 MUSIC: OFF</button>
+    // Ambil elemen video dan kanvas matrix
+    const videoPrank = document.getElementById('backgroundVideo');
+    const canvasMatrix = document.getElementById('matrixCanvas');
 
-    <!-- Canvas Tempat Efek Matrix -->
-    <canvas id="matrixCanvas"></canvas>
+    if (canvasMatrix && videoPrank) {
+        // 1. Hilangkan hujan kode hijau Matrix
+        canvasMatrix.style.display = 'none'; 
+        
+        // 2. Munculkan container video ke layar
+        videoPrank.style.display = 'block';  
+        
+        // 3. Wajib biarkan tetap muted lewat kode agar browser TIDAK MEMBEKUKAN TOMBOL
+        videoPrank.muted = true; 
+        videoPrank.play().catch(err => console.log("Video ditahan:", err));
+    }
 
-    <!-- Elemen Video Latar Belakang Baru untuk Fase 3 -->
-    <video id="backgroundVideo" loop muted playsinline style="display: none;">
-        <source src="video.mp4" type="video/mp4">
-    </video>
+    log1.style.color = "#ff3333";
+    log1.innerHTML = "> !! CRITICAL EXPLOIT DETECTED !!";
+    log2.style.color = "#ff3333";
+    log2.innerHTML = "> SECURITY: HONEYPOT_TRAP_TRIGGERED";
+    log3.style.color = "#ff3333";
+    log3.innerHTML = "> MESSAGE: Lah kepo amat baca chat orang! Kena tipu lu wkwk 🖕";
 
-    <!-- Elemen Audio Musik (Sudah disesuaikan menjadi hacker.mp3) -->
-    <audio id="hackerMusic" loop>
-        <source src="hacker.mp3" type="audio/mp3">
-    </audio>
-
-    <div class="wrapper">
-        <div class="dashboard-header">
-            <h1>[ MATRIX_EXPLOIT_CORE_v14.5 ]</h1>
-            <div class="subtitle">INTEGRATED CODEPEN BUILD</div>
-        </div>
-
-        <div class="input-panel">
-            <div class="input-group">
-                <label>TARGET PHONE NUMBER / ID:</label>
-                <input type="text" id="targetNumber" value="+62 812-3456-78xx">
-            </div>
-            <div class="input-group">
-                <label>CHOOSE EXPLOIT METRIC:</label>
-                <select id="exploitMethod">
-                    <option value="otp">OTP Bypass & Buffer Overflow</option>
-                    <option value="session">WhatsApp Web Session Hijacking</option>
-                    <option value="sqlite">Local SQLite Database Extraction</option>
-                </select>
-                <div class="beta-warning">
-                    [WARNING]: Framework is currently in experimental BETA. 
-                    Due to database handshake latency, the framework can 
-                    sometime pull old backup history instead of live current messages.
-                </div>
-            </div>
-        </div>
-
-        <div class="terminal" id="terminalBox">
-            <div id="log1">> CONSOLE: SYSTEM_READY</div>
-            <div id="log2" style="color: #666;">> Klik tombol di bawah 1 kali untuk memulai exploit...</div>
-            <div id="log3"></div>
-        </div>
-
-        <div class="card-container">
-            <button class="vibe-button" id="flipButton" onclick="kontrolTahapanPrank()">
-                <div class="front" id="textTombol">EXECUTE<br>PAYLOAD</div>
-                <div class="back">🖕</div>
-            </button>
-        </div>
-    </div>
-
-    <!-- SCRIPT HUBUNGAN KE JAVASCRIPT -->
-    <script src="script.js"></script>
-
-</body>
-</html>
+    if (card) {
+        card.classList.add('flipped');
+    }
+}
