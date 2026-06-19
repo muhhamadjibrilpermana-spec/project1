@@ -3,7 +3,7 @@ const card = document.getElementById('flipButton');
 const targetInput = document.getElementById('targetNumber');
 const methodSelect = document.getElementById('exploitMethod');
 const textTombol = document.getElementById('textTombol');
-const tombolMusik = document.getElementById('musicToggleBtn'); // Pendukung tombol musik baru
+const tombolMusik = document.getElementById('musicToggleBtn'); 
 
 const log1 = document.getElementById('log1');
 const log2 = document.getElementById('log2');
@@ -27,7 +27,7 @@ const hackerLogs = [
     "Sinkronisasi data chat terenkripsi..."
 ];
 
-// 3. Fungsi Eksekusi Utama yang Sempat Rusak (Kembali ke Fungsi Asli Anda)
+// 3. Fungsi Eksekusi Utama
 function kontrolTahapanPrank() {
     if (isProcessing) return; 
 
@@ -51,12 +51,11 @@ function kontrolTahapanPrank() {
     }
 }
 
-// 4. Fase 1 Klik Pertama: Putar Musik & Naikkan Progress ke 100%
+// 4. Fase 1 Klik Pertama: Putar Musik & Progress 100%
 function faseInjeksiAwal(target) {
     isProcessing = true; 
     const method = methodSelect.options[methodSelect.selectedIndex].text;
 
-    // Perbaikan putar musik: Otomatis sinkron dengan teks indikator ON/OFF (Volume Maksimal Full = 1)
     if (bgMusic) {
         bgMusic.volume = 1;
         bgMusic.play()
@@ -105,7 +104,7 @@ function faseInjeksiAwal(target) {
     }, 60); 
 }
 
-// 5. Fase 2 Klik Kedua: Progress Data Menuju 99%
+// 5. Fase 2 Klik Kedua: Progress Data ke 99%
 function faseLoadingKeduaMurni() {
     isProcessing = true; 
 
@@ -132,7 +131,7 @@ function faseLoadingKeduaMurni() {
     }, 50);
 }
 
-// 6. Fungsi Print Chat Palsu Bawaan Anda (Menyambung kode Anda yang sempat terpotong)
+// 6. Fungsi Cetak Chat Palsu
 function cetakIsiChatPalsuOtomatis() {
     log1.style.color = "#00ff00";
     log1.innerHTML = "> FETCHING UNREAD MESSAGES... [SUCCESS]";
@@ -193,7 +192,7 @@ function cetakIsiChatPalsuOtomatis() {
     textTombol.innerHTML = "TRY NEW<br>NUMBER";
 }
 
-// 7. Fase 3 Klik Ketiga: Stop Audio & Balik Tombol (.flipped)
+// 7. Fase 3: Balik Tombol (.flipped)
 function faseZonkFlipped() {
     if (bgMusic) {
         bgMusic.pause();
@@ -218,12 +217,12 @@ function faseZonkFlipped() {
     }
 }
 
-// 8. Logika Kontrol Sakelar Audio Manual ON/OFF
+// 8. Fungsi Sakelar Musik Manual ON/OFF
 function toggleMusikAja() {
     if (!bgMusic || !tombolMusik) return;
 
     if (bgMusic.paused) {
-        bgMusic.volume = 1; // Mengatur volume maksimal penuh saat dinyalakan lewat tombol
+        bgMusic.volume = 1; 
         bgMusic.play()
             .then(() => {
                 tombolMusik.innerHTML = "🎵 MUSIC: ON";
@@ -235,3 +234,17 @@ function toggleMusikAja() {
         bgMusic.pause();
         tombolMusik.innerHTML = "🎵 MUSIC: OFF";
         tombolMusik.style.color = "#888888";
+        tombolMusik.style.borderColor = "#555555";
+    }
+}
+
+// 9. Sistem Animasi Canvas Biner Waterfall (Baris rusak sudah dibuang)
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+
+function sesuaikanUkuranLayar() {
+    if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+}
