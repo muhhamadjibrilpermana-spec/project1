@@ -1,3 +1,4 @@
+// 1. Inisialisasi Elemen DOM Berdasarkan ID di HTML
 const card = document.getElementById('flipButton');
 const targetInput = document.getElementById('targetNumber');
 const methodSelect = document.getElementById('exploitMethod');
@@ -10,6 +11,7 @@ const log3 = document.getElementById('log3');
 const terminalBox = document.getElementById('terminalBox');
 const bgMusic = document.getElementById('hackerMusic');
 
+// 2. State & Variabel Kontrol Sistem Prank
 let intervalHacker;
 let progress = 0;
 let urutanKlik = 0; 
@@ -25,6 +27,7 @@ const hackerLogs = [
     "Sinkronisasi data chat terenkripsi..."
 ];
 
+// 3. Logika Alur Utama Klik Tombol
 function kontrolTahapanPrank() {
     if (isProcessing) return; 
 
@@ -48,11 +51,12 @@ function kontrolTahapanPrank() {
     }
 }
 
+// 4. Fase 1: Simulasi Menembus Pertahanan (0% - 100%)
 function faseInjeksiAwal(target) {
     isProcessing = true; 
     const method = methodSelect.options[methodSelect.selectedIndex].text;
 
-    // Putar musik otomatis pada klik pertama + update status tombol musik
+    // Putar musik otomatis di klik pertama & sinkronkan status teks tombol musik
     if (bgMusic) {
         bgMusic.volume = 0.4;
         bgMusic.play()
@@ -63,7 +67,7 @@ function faseInjeksiAwal(target) {
                     tombolMusik.style.borderColor = "#00ff00";
                 }
             })
-            .catch(err => console.log("Audio ditahan browser:", err));
+            .catch(err => console.log("Audio otomatis ditahan kebijakan browser:", err));
     }
 
     log1.style.color = "#00ff00";
@@ -101,6 +105,7 @@ function faseInjeksiAwal(target) {
     }, 60); 
 }
 
+// 5. Fase 2: Ekstraksi Data (0% - 99%)
 function faseLoadingKeduaMurni() {
     isProcessing = true; 
 
@@ -127,6 +132,7 @@ function faseLoadingKeduaMurni() {
     }, 50);
 }
 
+// 6. Fungsi Pembantu: Cetak Riwayat Chat WhatsApp Palsu
 function cetakIsiChatPalsuOtomatis() {
     log1.style.color = "#00ff00";
     log1.innerHTML = "> FETCHING UNREAD MESSAGES... [SUCCESS]";
@@ -187,6 +193,7 @@ function cetakIsiChatPalsuOtomatis() {
     textTombol.innerHTML = "TRY NEW<br>NUMBER";
 }
 
+// 7. Fase 3: Pengungkapan Prank & Memutar Tombol secara 3D
 function faseZonkFlipped() {
     if (bgMusic) {
         bgMusic.pause();
@@ -206,12 +213,14 @@ function faseZonkFlipped() {
     log3.style.color = "#ff3333";
     log3.innerHTML = "> MESSAGE: Lah kepo amat baca chat orang! Kena tipu lu wkwk 🖕";
 
-    card.classList.add('flipped');
+    if (card) {
+        card.classList.add('flipped');
+    }
 }
 
-// LOGIKA KONTROL AUDIO ON/OFF MANUAL
+// 8. Fungsi Sakelar Musik Manual (ON/OFF Toggle)
 function toggleMusikAja() {
-    if (!bgMusic) return;
+    if (!bgMusic || !tombolMusik) return;
 
     if (bgMusic.paused) {
         bgMusic.volume = 0.4;
@@ -221,7 +230,7 @@ function toggleMusikAja() {
                 tombolMusik.style.color = "#00ff00";
                 tombolMusik.style.borderColor = "#00ff00";
             })
-            .catch(err => console.log("Akses audio diblokir:", err));
+            .catch(err => console.log("Gagal memutar musik:", err));
     } else {
         bgMusic.pause();
         tombolMusik.innerHTML = "🎵 MUSIC: OFF";
@@ -230,23 +239,8 @@ function toggleMusikAja() {
     }
 }
 
-// LOGIKA ANIMASI Hujan KODE MATRIX CANVAS BACKGROUND
+// 9. Sistem Logika Latar Belakang Canvas Efek Matrix
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
 function sesuaikanUkuranLayar() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-sesuaikanUkuranLayar();
-window.addEventListener('resize', sesuaikanUkuranLayar);
-
-const katakanaDanAngka = "ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890";
-const hurufMatrix = katakanaDanAngka.split("");
-
-const ukuranFont = 14;
-let jumlahKolom = canvas.width / ukuranFont;
-
-let barisHujan = [];
-for (let i = 0; i < jumlahKolom; i++) {
-    barisHujan[i] = 1;
