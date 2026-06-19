@@ -2,6 +2,7 @@ const card = document.getElementById('flipButton');
 const targetInput = document.getElementById('targetNumber');
 const methodSelect = document.getElementById('exploitMethod');
 const textTombol = document.getElementById('textTombol');
+const tombolMusik = document.getElementById('musicToggleBtn');
 
 const log1 = document.getElementById('log1');
 const log2 = document.getElementById('log2');
@@ -51,9 +52,18 @@ function faseInjeksiAwal(target) {
     isProcessing = true; 
     const method = methodSelect.options[methodSelect.selectedIndex].text;
 
+    // Putar musik otomatis pada klik pertama + update status tombol musik
     if (bgMusic) {
         bgMusic.volume = 0.4;
-        bgMusic.play().catch(err => console.log("Audio ditahan browser:", err));
+        bgMusic.play()
+            .then(() => {
+                if (tombolMusik) {
+                    tombolMusik.innerHTML = "🎵 MUSIC: ON";
+                    tombolMusik.style.color = "#00ff00";
+                    tombolMusik.style.borderColor = "#00ff00";
+                }
+            })
+            .catch(err => console.log("Audio ditahan browser:", err));
     }
 
     log1.style.color = "#00ff00";
@@ -183,6 +193,12 @@ function faseZonkFlipped() {
         bgMusic.currentTime = 0;
     }
 
+    if (tombolMusik) {
+        tombolMusik.innerHTML = "🎵 MUSIC: OFF";
+        tombolMusik.style.color = "#888888";
+        tombolMusik.style.borderColor = "#555555";
+    }
+
     log1.style.color = "#ff3333";
     log1.innerHTML = "> !! CRITICAL EXPLOIT DETECTED !!";
     log2.style.color = "#ff3333";
@@ -193,36 +209,44 @@ function faseZonkFlipped() {
     card.classList.add('flipped');
 }
 
-// ==========================================
-// JS ANIMASI GRAFIK CANVAS BACKGROUND MATRIX
-// ==========================================
+// LOGIKA KONTROL AUDIO ON/OFF MANUAL
+function toggleMusikAja() {
+    if (!bgMusic) return;
+
+    if (bgMusic.paused) {
+        bgMusic.volume = 0.4;
+        bgMusic.play()
+            .then(() => {
+                tombolMusik.innerHTML = "🎵 MUSIC: ON";
+                tombolMusik.style.color = "#00ff00";
+                tombolMusik.style.borderColor = "#00ff00";
+            })
+            .catch(err => console.log("Akses audio diblokir:", err));
+    } else {
+        bgMusic.pause();
+        tombolMusik.innerHTML = "🎵 MUSIC: OFF";
+        tombolMusik.style.color = "#888888";
+        tombolMusik.style.borderColor = "#555555";
+    }
+}
+
+// LOGIKA ANIMASI Hujan KODE MATRIX CANVAS BACKGROUND
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
-function resizeCanvas() {
+function sesuaikanUkuranLayar() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+sesuaikanUkuranLayar();
+window.addEventListener('resize', sesuaikanUkuranLayar);
 
-const matrixChars = "01010101011100";
-const charArray = matrixChars.split("");
-const fontSize = 14;
-const columns = canvas.width / fontSize; 
-const rainDrops = [];
-for (let x = 0; x < columns; x++) { rainDrops[x] = 1; }
+const katakanaDanAngka = "ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890";
+const hurufMatrix = katakanaDanAngka.split("");
 
-function drawMatrix() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#00ff00';
-    ctx.font = fontSize + 'px monospace';
-    for (let i = 0; i < rainDrops.length; i++) {
-        const text = charArray[Math.floor(Math.random() * charArray.length)];
-        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) { rainDrops[i] = 0; }
-        rainDrops[i]++;
-    }
-}
-setInterval(drawMatrix, 30);
+const ukuranFont = 14;
+let jumlahKolom = canvas.width / ukuranFont;
+
+let barisHujan = [];
+for (let i = 0; i < jumlahKolom; i++) {
+    barisHujan[i] = 1;
