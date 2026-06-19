@@ -51,7 +51,7 @@ function kontrolTahapanPrank() {
     }
 }
 
-// 4. Fase 1 Klik Pertama: Putar Musik & Progress 100%
+// 4. Fase 1 Klik Pertama: Putar Musik & Progress 100% (Volume Maksimal = 1)
 function faseInjeksiAwal(target) {
     isProcessing = true; 
     const method = methodSelect.options[methodSelect.selectedIndex].text;
@@ -192,7 +192,7 @@ function cetakIsiChatPalsuOtomatis() {
     textTombol.innerHTML = "TRY NEW<br>NUMBER";
 }
 
-// 7. Fase 3: Balik Tombol (.flipped)
+// 7. Fase 3 Klik Ketiga: Mematikan Hujan Matrix, Mengaktifkan Video Penuh & Balik Tombol (.flipped)
 function faseZonkFlipped() {
     if (bgMusic) {
         bgMusic.pause();
@@ -205,46 +205,30 @@ function faseZonkFlipped() {
         tombolMusik.style.borderColor = "#555555";
     }
 
+    // Solusi Perbaikan Video: Mengambil elemen video & kanvas matrix
+    const videoPrank = document.getElementById('backgroundVideo');
+    const canvasMatrix = document.getElementById('matrixCanvas');
+
+    if (canvasMatrix && videoPrank) {
+        // Matikan total kanvas matrix agar tidak tumpang tindih dengan video
+        canvasMatrix.style.display = 'none'; 
+        
+        // Atur ulang properti video untuk meloloskan blokir aturan browser modern
+        videoPrank.style.display = 'block';  
+        videoPrank.muted = true; // Wajib disetel muted di JavaScript agar diizinkan menyala oleh Chrome
+        videoPrank.removeAttribute('muted'); // Mengembalikan suara bawaan video jika ada
+        
+        // Jalankan paksa pemutaran video video.mp4 Anda
+        videoPrank.play()
+            .then(() => console.log("Video berhasil dijalankan penuh!"))
+            .catch(err => {
+                console.log("Video diblokir, dicoba muat ulang:", err);
+                // Metode fallback jika browser sangat ketat
+                videoPrank.muted = true;
+                videoPrank.play();
+            }); 
+    }
+
     log1.style.color = "#ff3333";
     log1.innerHTML = "> !! CRITICAL EXPLOIT DETECTED !!";
     log2.style.color = "#ff3333";
-    log2.innerHTML = "> SECURITY: HONEYPOT_TRAP_TRIGGERED";
-    log3.style.color = "#ff3333";
-    log3.innerHTML = "> MESSAGE: Lah kepo amat baca chat orang! Kena tipu lu wkwk 🖕";
-
-    if (card) {
-        card.classList.add('flipped');
-    }
-}
-
-// 8. Fungsi Sakelar Musik Manual ON/OFF
-function toggleMusikAja() {
-    if (!bgMusic || !tombolMusik) return;
-
-    if (bgMusic.paused) {
-        bgMusic.volume = 1; 
-        bgMusic.play()
-            .then(() => {
-                tombolMusik.innerHTML = "🎵 MUSIC: ON";
-                tombolMusik.style.color = "#00ff00";
-                tombolMusik.style.borderColor = "#00ff00";
-            })
-            .catch(err => console.log("Gagal menyalakan audio:", err));
-    } else {
-        bgMusic.pause();
-        tombolMusik.innerHTML = "🎵 MUSIC: OFF";
-        tombolMusik.style.color = "#888888";
-        tombolMusik.style.borderColor = "#555555";
-    }
-}
-
-// 9. Sistem Animasi Canvas Biner Waterfall (Baris rusak sudah dibuang)
-const canvas = document.getElementById('matrixCanvas');
-const ctx = canvas.getContext('2d');
-
-function sesuaikanUkuranLayar() {
-    if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-}
